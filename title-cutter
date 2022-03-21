@@ -1,0 +1,22 @@
+import os 
+def pentestblog(user):
+    try:
+         f = open('users.txt','w') #some line is only for knowledge purpose...............
+         f.write(user)
+         f.close()
+         
+    except:
+          print ("Something Wrong!!!")      
+user = input("Enter URL: ")
+pentestblog(user)
+
+def welcome():
+    f =  open('users.txt','r')
+    for x in f:
+       if "http" in x:
+          var = os.popen(f"curl -s {x} | grep '<title>' | cut -d '<' -f 2 | cut -d '>' -f 2 ").read()
+          if "Moved" not in var:
+                print(var)
+          else:
+                print("Plz add https in your website")
+welcome()
